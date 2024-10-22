@@ -1,0 +1,68 @@
+Python
+import datetime
+
+def calcular_conta_agua(nome, endereco, cpf, rg, leitura_anterior, leitura_atual, mes, ano, dia_vencimento):
+    """Calcula o valor da conta de água e adiciona um novo usuário à lista.
+
+    Args:
+        nome (str): Nome completo do usuário.
+        endereco (str): Endereço completo do usuário.
+        cpf (str): Número do CPF do usuário.
+        rg (str): Número do RG do usuário.
+        leitura_anterior (int): Leitura anterior do hidrômetro.
+        leitura_atual (int): Leitura atual do hidrômetro.
+        mes (str): Mês da leitura (em texto).
+        ano (int): Ano da leitura.
+        dia_vencimento (int): Dia do vencimento da conta.
+
+    Returns:
+        float: Valor total da conta de água.
+    """
+
+    # Cálculo do consumo e valor da conta (adapte de acordo com as suas regras)
+    consumo = leitura_atual - leitura_anterior
+    if consumo <= 5000:
+        valor_conta = 30
+    elif consumo <= 8000:
+        valor_conta = 39
+    else:
+        valor_conta = 39 + ((consumo - 8000) * 5.5 / 1000)
+
+    # Criar um dicionário para o novo usuário
+    novo_usuario = {
+        "nome": nome,
+        "endereco": endereco,
+        "cpf": cpf,
+        "rg": rg,
+        "leitura_anterior": leitura_anterior,
+        "leitura_atual": leitura_atual,
+        "consumo": consumo,
+        "mes": mes,
+        "data_vencimento": datetime.date(ano, int(mes), dia_vencimento),
+        "valor_conta": valor_conta
+    }
+
+    # Adicionar o usuário à lista
+    usuarios.append(novo_usuario)
+
+    return valor_conta
+
+# Lista para armazenar os dados dos usuários
+usuarios = []
+
+# Obter os dados do usuário
+nome = input("Digite o nome do usuário: ")
+endereco = input("Digite o endereço: ")
+# ... (coletar outros dados)
+ano = int(input("Digite o ano de vencimento: "))
+mes = int(input("Digite o mês de vencimento (número): "))
+dia = int(input("Digite o dia de vencimento: "))
+data_vencimento = datetime.date(ano, mes, dia)
+
+# Calcular e exibir o valor da conta
+valor_conta = calcular_conta_agua(nome, endereco, cpf, rg, leitura_anterior, leitura_atual, mes, ano, dia)
+print("O valor da conta de água é: R$", valor_conta)
+
+# Exibir os dados do usuário (opcional)
+for usuario in usuarios:
+    print(usuario)
